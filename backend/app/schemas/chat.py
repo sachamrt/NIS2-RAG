@@ -32,6 +32,7 @@ class ChatResponse(BaseModel):
 class DocumentOut(BaseModel):
     source: str
     chunks: int
+    deletable: bool = False
 
 
 class DocumentsResponse(BaseModel):
@@ -48,3 +49,13 @@ class HealthResponse(BaseModel):
     collection: str
     points: int
     qdrant_reachable: bool
+
+class DeleteResponse(BaseModel):
+    source: str
+    chunks_removed: int
+
+
+class UploadResponse(BaseModel):
+    source: str
+    pages: int
+    chunks: int

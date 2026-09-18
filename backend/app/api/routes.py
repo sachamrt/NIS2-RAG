@@ -4,17 +4,26 @@ import json
 import logging
 from collections.abc import Iterator
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
 
 from app.core.config import get_settings
+from app.ingestion.upload import (
+    DocumentNotFound,
+    ProtectedDocument,
+    UploadError,
+    ingest_upload,
+)
+from app.ingestion.upload import delete_document
 from app.rag.chain import answer, answer_stream
 from app.rag.documents import list_documents
 from app.schemas.chat import (
     ChatRequest,
     ChatResponse,
+    DeleteResponse,
     DocumentsResponse,
     HealthResponse,
+    UploadResponse,
 )
 
 logger = logging.getLogger(__name__)
@@ -94,7 +103,40 @@ def chat_stream(request: ChatRequest) -> StreamingResponse:
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
     
-@router.post("/document")
-def post_document():
-    """Placeholder for future document ingestion endpoint."""
-    raise HTTPException(status_code=501, detail="Document ingestion not implemented yet")
+@router.post("/documents")
+def upload(file: UploadFile) -> UploadResponse:
+    """Upload a PDF document to the RAG system."""
+    content = file.file.read()
+    try:
+        record = ingest_upload(content, file.filename or "unnamed.pdf")
+    except UploadError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("document upload failed")
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    return UploadResponse(
+        source=record["file"],
+        pages=record["pages"],
+        chunks=record["chunks"]
+    )
+    
+
+@router.delete("/documents/{filename}", response_model=DeleteResponse)
+def delete(filename: str) -> DeleteResponse:
+    """Delete a document's chunks and its stored PDF.
+
+    Plain `{filename}`, not `{filename:path}`: the path converter would allow
+    "/" back into the segment, which is what the name sanitising defends against.
+    """
+    try:
+        record = delete_document(filename)
+    except UploadError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except DocumentNotFound as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ProtectedDocument as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("document deletion failed")
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    return DeleteResponse(**record)

@@ -5,6 +5,7 @@ aggregation, so listing stays cheap as the corpus grows.
 """
 
 from app.core.config import get_settings
+from app.core.paths import RAW_PDF_DIR
 from app.core.vectorstore import get_client
 
 
@@ -19,7 +20,15 @@ def list_documents() -> dict:
     info = client.get_collection(name)
     facet = client.facet(collection_name=name, key="metadata.source", limit=100)
     documents = sorted(
-        ({"source": str(hit.value), "chunks": hit.count} for hit in facet.hits),
+        (
+            {
+                "source": str(hit.value),
+                "chunks": hit.count,
+                # Curated PDFs on disk are off-limits; uploads left no file.
+                "deletable": not (RAW_PDF_DIR / str(hit.value)).exists(),
+            }
+            for hit in facet.hits
+        ),
         key=lambda d: d["source"],
     )
     return {

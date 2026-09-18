@@ -13,4 +13,8 @@ PROJECT_ROOT = BACKEND_ROOT.parent
 
 ENV_FILE = PROJECT_ROOT / ".env"
 DATA_DIR = PROJECT_ROOT / "data"
+
+# The corpus you curate by hand, and the only PDFs kept on disk. Uploads are
+# ingested from a temp file and never stored: once the chunks are in Qdrant the
+# PDF has no further use, and a rebuild is expected to lose them.
 RAW_PDF_DIR = DATA_DIR / "raw_pdfs"
