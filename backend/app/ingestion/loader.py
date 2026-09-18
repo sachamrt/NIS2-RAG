@@ -9,7 +9,7 @@ from pathlib import Path
 
 from langchain_core.documents import Document
 
-RAW_PDF_DIR = Path("data/raw_pdfs")
+from app.core.paths import RAW_PDF_DIR
 
 
 def discover_pdfs(directory: Path | str = RAW_PDF_DIR) -> list[Path]:

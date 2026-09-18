@@ -1,0 +1,16 @@
+[project]
+name = "nis2-rag-backend"
+version = "0.1.0"
+requires-python = ">=3.12"
+description = "RAG over the NIS2 directive: FastAPI + LangChain + Qdrant"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]          # so `pytest` finds the app package without an install
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "RUF"]

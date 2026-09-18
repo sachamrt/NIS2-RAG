@@ -27,12 +27,14 @@ def main() -> int:
 
     llm = build_llm(llm_provider, settings)
     reply = llm.invoke("Reply with the single word: ok")
-    print(f"llm        {llm_provider:<10} {type(llm).__name__} -> {reply.content.strip()[:40]!r}")
+    preview = reply.content.strip()[:40]
+    print(f"llm        {llm_provider:<10} {type(llm).__name__} -> {preview!r}")
 
     embeddings = build_embeddings(emb_provider, settings)
     vector = embeddings.embed_query("NIS2 directive")
     print(f"embeddings {emb_provider:<10} {type(embeddings).__name__} -> dim {len(vector)}")
-    print(f"\nQdrant collection {settings.qdrant_collection!r} must hold {len(vector)}-dim vectors.")
+    collection = settings.qdrant_collection
+    print(f"\nQdrant collection {collection!r} must hold {len(vector)}-dim vectors.")
     return 0
 
 

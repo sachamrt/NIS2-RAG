@@ -31,7 +31,7 @@ def health() -> HealthResponse:
     try:
         info = list_documents()
         reachable, points = True, info["points"]
-    except Exception:  # noqa: BLE001 -- health must report, never raise
+    except Exception:
         reachable, points = False, 0
 
     model = getattr(settings, f"{settings.llm_provider}_llm_model", settings.llm_provider)
@@ -93,3 +93,8 @@ def chat_stream(request: ChatRequest) -> StreamingResponse:
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+    
+@router.post("/document")
+def post_document():
+    """Placeholder for future document ingestion endpoint."""
+    raise HTTPException(status_code=501, detail="Document ingestion not implemented yet")

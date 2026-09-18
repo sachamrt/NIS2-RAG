@@ -33,7 +33,7 @@ def main() -> int:
 
     try:
         reply = llm.invoke(args.prompt)
-    except Exception as exc:  # noqa: BLE001 -- surface the provider's own message
+    except Exception as exc:
         print(f"FAIL  {type(exc).__name__}: {exc}"[:400])
         return 1
 

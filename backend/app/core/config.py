@@ -6,13 +6,15 @@ from typing import Literal
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from app.core.paths import ENV_FILE
+
 LLMProvider = Literal["local", "openai", "anthropic", "mistral"]
 EmbeddingProvider = Literal["local", "openai", "mistral"]
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=ENV_FILE,
         env_file_encoding="utf-8",
         extra="ignore",
         case_sensitive=False,
