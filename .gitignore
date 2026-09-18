@@ -6,5 +6,6 @@ __pycache__/
 qdrant_storage/
 data/processed/
 .DS_Store
-EOF
 *.pyc
+.pytest_cache/
+.ruff_cache/
