@@ -1,0 +1,10 @@
+.venv
+.env
+.claude
+claude.md
+__pycache__/
+qdrant_storage/
+data/processed/
+.DS_Store
+EOF
+*.pyc
