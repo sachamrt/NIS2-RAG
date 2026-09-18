@@ -1,0 +1,2213 @@
+{
+  "timestamp": "2026-09-18T23:17:51",
+  "config": {
+    "llm_provider": "mistral",
+    "llm_model": "ministral-8b-latest",
+    "embedding_provider": "mistral",
+    "embedding_model": "mistral-embed",
+    "temperature": 0.0,
+    "k": 4,
+    "chunk_size": 1000,
+    "chunk_overlap": 150,
+    "collection": "nis2_mistral",
+    "points": 358,
+    "dataset_sha": "4cc9634f0cb2",
+    "judge_model": "ministral-14b-latest",
+    "mode": "judged"
+  },
+  "summary": {
+    "entries": 46,
+    "errors": 0,
+    "retrieval": {
+      "n": 43,
+      "hit_rate": 0.837,
+      "mrr": 0.682,
+      "page_recall": 0.826
+    },
+    "generation": {
+      "n": 46,
+      "must_include_rate": 0.744,
+      "hallucination_flags": 3,
+      "refusal_rate_unanswerable": 0.667
+    },
+    "judge": {
+      "n": 46,
+      "correct_rate": 0.674,
+      "partial_rate": 0.14,
+      "faithful_rate": 0.848,
+      "unanswerable_correct": 0.667
+    },
+    "by_type": {
+      "comparison": {
+        "n": 2,
+        "hit_rate": 1.0,
+        "must_include_rate": 1.0,
+        "correct_rate": 0.5
+      },
+      "definition": {
+        "n": 5,
+        "hit_rate": 0.8,
+        "must_include_rate": 0.8,
+        "correct_rate": 0.8
+      },
+      "lookup": {
+        "n": 25,
+        "hit_rate": 0.8,
+        "must_include_rate": 0.8,
+        "correct_rate": 0.64
+      },
+      "multi_page": {
+        "n": 3,
+        "hit_rate": 1.0,
+        "must_include_rate": 0.333,
+        "correct_rate": 0.667
+      },
+      "multi_part": {
+        "n": 5,
+        "hit_rate": 0.8,
+        "must_include_rate": 0.4,
+        "correct_rate": 0.6
+      },
+      "partial": {
+        "n": 2,
+        "hit_rate": 1.0,
+        "must_include_rate": 1.0,
+        "correct_rate": 1.0
+      },
+      "recital": {
+        "n": 1,
+        "hit_rate": 1.0,
+        "must_include_rate": 1.0,
+        "correct_rate": 1.0
+      },
+      "unanswerable": {
+        "n": 3,
+        "hit_rate": null,
+        "must_include_rate": null,
+        "correct_rate": 0.667
+      }
+    },
+    "disagreements": [
+      {
+        "id": "digital-providers",
+        "phrases": "fail",
+        "judge": "correct",
+        "missing": [
+          [
+            "marketplace"
+          ],
+          [
+            "search engine"
+          ],
+          [
+            "social network"
+          ]
+        ]
+      },
+      {
+        "id": "gdpr-interplay",
+        "phrases": "fail",
+        "judge": "correct",
+        "missing": [
+          [
+            "same conduct",
+            "not impose",
+            "cannot impose",
+            "no administrative fine",
+            "not also"
+          ]
+        ]
+      },
+      {
+        "id": "waste-water-vs-waste-management",
+        "phrases": "pass",
+        "judge": "incorrect"
+      },
+      {
+        "id": "scope-size-threshold",
+        "phrases": "halluc",
+        "judge": "faithful",
+        "missing": [
+          "50 million",
+          "43 million"
+        ]
+      },
+      {
+        "id": "voluntary-notification",
+        "phrases": "pass",
+        "judge": "incorrect"
+      }
+    ]
+  },
+  "results": [
+    {
+      "id": "deadline-early-warning",
+      "type": "lookup",
+      "question": "How quickly must an entity send an early warning after a significant incident?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 21
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "Entities must submit an early warning **without undue delay and in any event within 24 hours** of becoming aware of a significant incident [CELEX_32022L2555_EN_TXT.pdf, p.50].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE and CONTEXT, including the 24-hour deadline and the 'without undue delay' requirement, with direct citation of the source."
+      },
+      "seconds": 3.55
+    },
+    {
+      "id": "deadline-incident-notification",
+      "type": "lookup",
+      "question": "What is the deadline for submitting the incident notification?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "Entities must submit an **incident notification** without undue delay and **no later than 72 hours** after becoming aware of a significant incident [CELEX_32022L2555_EN_TXT.pdf, p.50].\n\nThis notification should update the early warning and include an initial assessment of the incident’s severity, impact, and any available indicators of compromise [CELEX_32022L2555_EN_TXT.pdf, p.50].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER matches the REFERENCE and CONTEXT exactly, including the 72-hour deadline and all required details."
+      },
+      "seconds": 2.68
+    },
+    {
+      "id": "deadline-final-report",
+      "type": "lookup",
+      "question": "When is the final report on a significant incident due?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 21
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "The final report on a significant incident is due under the following conditions:\n\n- **Deadline**: Not later than one month after the submission of the incident notification (which must be submitted within 72 hours of becoming aware of the incident) **[CELEX_32022L2555_EN_TXT.pdf, p.50]**.\n- **Exception for ongoing incidents**: If the incident is still ongoing at the time of the final report submission, the entity must provide a **progress report** at that time and submit the final report **within one month of handling the incident** **[CELEX_32022L2555_EN_TXT.pdf, p.21]**.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The answer accurately reflects the deadlines and exceptions for the final report as stated in the context, including the one-month rule post-notification and the handling of ongoing incidents."
+      },
+      "seconds": 2.83
+    },
+    {
+      "id": "deadline-trust-service-provider",
+      "type": "lookup",
+      "question": "Do trust service providers follow the same 72-hour incident notification deadline as other entities?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "No, trust service providers do **not** follow the same 72-hour incident notification deadline as other entities.\n\nTrust service providers must notify the **CSIRT or competent authority without undue delay and in any event within 24 hours** of becoming aware of a significant incident that impacts their trust services **[CELEX_32022L2555_EN_TXT.pdf, p.50]**.\n\nOther entities (e.g., essential or important entities) must submit an **incident notification within 72 hours** of becoming aware of a significant incident **[CELEX_32022L2555_EN_TXT.pdf, p.50]**.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The answer accurately reflects the 24-hour derogation for trust service providers (Art. 23(4)) and contrasts it with the 72-hour rule for other entities, matching the reference and context exactly."
+      },
+      "seconds": 3.11
+    },
+    {
+      "id": "deadline-csirt-response",
+      "type": "lookup",
+      "question": "How fast must the CSIRT respond to an entity that submitted an early warning?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 2,
+        "rr": 0.5,
+        "page_recall": 1.0
+      },
+      "answer": "The CSIRT must provide a response to the notifying entity **without undue delay and, where possible, within 24 hours** of receiving the early warning **[CELEX_32022L2555_EN_TXT.pdf, p.50]**.\n\nThe response must include:\n- Initial feedback on the significant incident.\n- Upon request, guidance or operational advice on possible mitigation measures.\n- If the incident is suspected to be of criminal nature, guidance on reporting it to law enforcement authorities **[CELEX_32022L2555_EN_TXT.pdf, p.50]**.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE (Art. 23(5)) and is fully supported by the CONTEXT (p.50, paragraph 5)."
+      },
+      "seconds": 3.36
+    },
+    {
+      "id": "fine-essential",
+      "type": "lookup",
+      "question": "What is the maximum administrative fine for an essential entity that infringes Article 21 or 23?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 26
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "Member States must impose on essential entities an administrative fine for infringing **Article 21 or 23** with a maximum of at least:\n\n- **EUR 10 000 000**, or\n- **2 % of the total worldwide annual turnover** of the undertaking to which the entity belongs in the preceding financial year,\n\nwhichever is higher **[CELEX_32022L2555_EN_TXT.pdf, p.60]**.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE and CONTEXT, including the precise wording, thresholds, and legal reference."
+      },
+      "seconds": 2.59
+    },
+    {
+      "id": "fine-important",
+      "type": "lookup",
+      "question": "What is the maximum administrative fine for an important entity that infringes Article 21 or 23?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 26
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "Member States must impose a maximum administrative fine on an **important entity** that infringes **Article 21 or 23** of at least:\n\n- **EUR 7 000 000**, or\n- **1.4 % of the total worldwide annual turnover** of the entity in the preceding financial year,\n\n**whichever is higher** [CELEX_32022L2555_EN_TXT.pdf, p.60].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE and is fully supported by the CONTEXT (Art. 34(5) for important entities)."
+      },
+      "seconds": 3.83
+    },
+    {
+      "id": "date-transposition",
+      "type": "lookup",
+      "question": "By when did Member States have to transpose NIS2, and from when do the measures apply?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 1
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 49
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 1
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 49
+        }
+      ],
+      "retrieval": {
+        "hit": false,
+        "rank": null,
+        "rr": 0.0,
+        "page_recall": 0.0
+      },
+      "answer": "The directive does not specify a transposition deadline for Member States.\n\nThe directive does specify that the measures apply from **17 October 2024** for the technical and methodological requirements for DNS service providers, TLD name registries, cloud computing service providers, data centre service providers, content delivery network providers, managed service providers, managed security service providers, providers of online marketplaces, online search engines, social networking services platforms, and trust service providers [CELEX_32022L2555_EN_TXT.pdf, p.49].\n\nThe directive also states that the Commission may adopt implementing acts for other essential and important entities, but it does not provide a specific date for their application.",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "18 October 2024"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": false,
+        "refused": false,
+        "reason": "The ANSWER omits the **17 October 2024 transposition deadline** (Art. 41(1)) and incorrectly states the **18 October 2024** application date as 17 October 2024, while also misrepresenting the scope of the directive’s applicability."
+      },
+      "seconds": 3.24
+    },
+    {
+      "id": "date-nis1-repeal",
+      "type": "lookup",
+      "question": "What happens to the original NIS Directive?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 1
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 32
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 18
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 19
+        }
+      ],
+      "retrieval": {
+        "hit": false,
+        "rank": null,
+        "rr": 0.0,
+        "page_recall": 0.0
+      },
+      "answer": "The NIS2 Directive **repeals** the original NIS Directive (Directive (EU) 2016/1148) **in full** as of its entry into force.\n\n- The NIS2 Directive explicitly states that it **\"repeals Directive (EU) 2016/1148\"** [CELEX_32022L2555_EN_TXT.pdf, p.1].\n- All obligations, definitions, and requirements under the original NIS Directive are **no longer applicable** once NIS2 is transposed into national law by Member States.\n- The repeal means that entities previously covered under the original NIS Directive must now comply with NIS2’s updated rules, including expanded scope, stricter obligations, and new deadlines.",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "18 October 2024"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": false,
+        "refused": false,
+        "reason": "The ANSWER incorrectly states the repeal takes effect 'as of its entry into force' (14 Dec 2022) instead of the correct date (18 Oct 2024) and omits the requirement to use the correlation table in Annex III (Art. 44) for references."
+      },
+      "seconds": 4.25
+    },
+    {
+      "id": "date-entity-list",
+      "type": "lookup",
+      "question": "By when must Member States establish their list of essential and important entities, and how often is it reviewed?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 31
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 32
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 2,
+        "rr": 0.5,
+        "page_recall": 1.0
+      },
+      "answer": "Member States must establish their list of essential and important entities, as well as entities providing domain name registration services, **by 17 April 2025** [CELEX_32022L2555_EN_TXT.pdf, p.31].\n\nThe list must be **reviewed and updated on a regular basis and at least every two years thereafter** [CELEX_32022L2555_EN_TXT.pdf, p.31].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER matches the REFERENCE exactly in deadlines ('17 April 2025') and review frequency ('at least every two years'), and all claims are directly supported by the CONTEXT (p.31)."
+      },
+      "seconds": 3.55
+    },
+    {
+      "id": "date-change-notification",
+      "type": "lookup",
+      "question": "How long does an entity have to notify changes to the registration details it submitted?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 31
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 22
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "Entities must notify changes to their submitted registration details **without delay**, and in any event **within two weeks of the date of the change** [CELEX_32022L2555_EN_TXT.pdf, p.31].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE (Art. 3(4)) and is fully supported by the CONTEXT (p.31)."
+      },
+      "seconds": 2.04
+    },
+    {
+      "id": "date-review",
+      "type": "lookup",
+      "question": "When will the Commission review how NIS2 is functioning?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 28
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 28
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 47
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 44
+        }
+      ],
+      "retrieval": {
+        "hit": false,
+        "rank": null,
+        "rr": 0.0,
+        "page_recall": 0.0
+      },
+      "answer": "The Commission must **periodically review** the functioning of the NIS2 Directive, including its relevance for the sectors, subsectors, and types of entities covered, and whether amendments are needed due to changes in societal, political, technological, or market conditions **[CELEX_32022L2555_EN_TXT.pdf, p.28]**.\n\nThe context does **not** specify a fixed schedule for these reviews, only that they will occur **after consulting stakeholders**. It does, however, mention that the **CSIRTs network** must assess operational cooperation progress and submit a report **by 17 January 2025, and every two years thereafter**, which will inform the review process **[CELEX_32022L2555_EN_TXT.pdf, p.44]**.",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "17 October 2027"
+          ],
+          [
+            "36 months",
+            "three years",
+            "3 years"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER omits the exact deadline (17 October 2027) and frequency (every 36 months) specified in the REFERENCE (Art. 40), instead vaguely referencing 'periodic review' and misattributing the CSIRT report schedule as part of the review timeline."
+      },
+      "seconds": 3.19
+    },
+    {
+      "id": "date-penalty-rules",
+      "type": "lookup",
+      "question": "By when must Member States notify the Commission of their rules on penalties?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 61
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 26
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 26
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 2,
+        "rr": 0.5,
+        "page_recall": 1.0
+      },
+      "answer": "Member States must notify the Commission of their rules on penalties by **17 January 2025** [CELEX_32022L2555_EN_TXT.pdf, p.61].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "Matches the exact deadline (17 January 2025) and legal reference (Art. 36) from the CONTEXT."
+      },
+      "seconds": 2.0
+    },
+    {
+      "id": "domain-data-access",
+      "type": "lookup",
+      "question": "How quickly must a TLD registry reply to a lawful request for access to domain name registration data?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 54
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 22
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 22
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 22
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "Member States must require TLD name registries and domain name registration service providers to reply **without undue delay and in any event within 72 hours** of receiving a lawful request for access to domain name registration data [CELEX_32022L2555_EN_TXT.pdf, p.54].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE (Art. 28(5)) and is fully supported by the CONTEXT (p.54, 'within 72 hours')."
+      },
+      "seconds": 2.57
+    },
+    {
+      "id": "audit-cost",
+      "type": "lookup",
+      "question": "Who pays for a targeted security audit of an essential entity carried out by an independent body?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 56
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 17
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 59
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 59
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 3,
+        "rr": 0.3333333333333333,
+        "page_recall": 1.0
+      },
+      "answer": "The audited entity pays for a targeted security audit of an **essential entity** carried out by an independent body, unless the competent authority decides otherwise in duly substantiated cases **[CELEX_32022L2555_EN_TXT.pdf, p.59]**.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE (Art. 32(2)) and is fully supported by the CONTEXT (p.59)."
+      },
+      "seconds": 2.34
+    },
+    {
+      "id": "def-incident",
+      "type": "definition",
+      "question": "How does NIS2 define an 'incident'?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 51
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 33
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 33
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 3,
+        "rr": 0.3333333333333333,
+        "page_recall": 1.0
+      },
+      "answer": "The NIS2 directive defines an **incident** as:\n\n> *\"an event compromising the **availability, authenticity, integrity, or confidentiality** of stored, transmitted, or processed data or of the services offered by, or accessible via, network and information systems\"* **[CELEX_32022L2555_EN_TXT.pdf, p.33]**.\n\nThis means an incident occurs when any of these four core security principles are violated, regardless of intent or severity. The definition covers both data and service-related disruptions.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE definition (Art. 6(6) equivalent) and is fully supported by the CONTEXT (p.33, point 6)."
+      },
+      "seconds": 2.4
+    },
+    {
+      "id": "def-near-miss",
+      "type": "definition",
+      "question": "What is a 'near miss' under NIS2?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 33
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 51
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 41
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 55
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "Under NIS2, a **near miss** is defined as:\n\n- An event that **could have compromised** the availability, authenticity, integrity, or confidentiality of:\n  - Stored, transmitted, or processed data, or\n  - Services offered by or accessible via network and information systems.\n- The event was **successfully prevented from materialising** or **did not materialise** [CELEX_32022L2555_EN_TXT.pdf, p.33].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE and CONTEXT (p.33), including all key details (scope of data/services, prevention/non-materialization)."
+      },
+      "seconds": 3.79
+    },
+    {
+      "id": "def-large-scale-incident",
+      "type": "definition",
+      "question": "What makes a cybersecurity incident 'large-scale'?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 14
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 14
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 33
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "A cybersecurity incident is considered **large-scale** if it meets **either** of these conditions:\n\n- It causes a level of disruption that **exceeds a Member State’s capacity to respond to it** on its own.\n- It has a **significant impact on at least two Member States** [CELEX_32022L2555_EN_TXT.pdf, p.14, p.69].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER exactly matches the REFERENCE and CONTEXT (Art. 6(7) and recital 69), including the 'either' condition and the two criteria."
+      },
+      "seconds": 3.1
+    },
+    {
+      "id": "def-significant-incident",
+      "type": "definition",
+      "question": "When is an incident considered 'significant'?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 51
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "An incident is considered **significant** under NIS2 if it meets **either** of these criteria:\n\n- It has **caused or is capable of causing severe operational disruption** of the entity’s services **or** significant financial loss for the entity\n  [CELEX_32022L2555_EN_TXT.pdf, p.50].\n\n- It has **affected or is capable of affecting** other natural or legal persons by causing **considerable material or non-material damage**\n  [CELEX_32022L2555_EN_TXT.pdf, p.50].\n\nThe directive does not define \"severe\" or \"considerable\" but provides guidance that factors like the **extent of service disruption, duration of the incident, or number of affected recipients** may help assess severity\n[CELEX_32022L2555_EN_TXT.pdf, p.20].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER accurately reflects the REFERENCE and CONTEXT, including the two criteria for 'significant' incidents and the contextual guidance on assessing severity."
+      },
+      "seconds": 4.66
+    },
+    {
+      "id": "def-vulnerability",
+      "type": "definition",
+      "question": "What is a 'vulnerability' under NIS2?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 13
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 41
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 12
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 13
+        }
+      ],
+      "retrieval": {
+        "hit": false,
+        "rank": null,
+        "rr": 0.0,
+        "page_recall": 0.0
+      },
+      "answer": "The NIS2 Directive does not explicitly define the term **\"vulnerability\"** in its text. Instead, it refers to **\"publicly known vulnerabilities\"** in the context of a European vulnerability database managed by ENISA.\n\nThe directive focuses on **publicly known vulnerabilities in ICT products or ICT services**, which are described in the database as:\n- Information describing the vulnerability\n- The affected ICT products or ICT services\n- The severity of the vulnerability, including the circumstances under which harm may occur\n\nThe directive encourages entities (including those outside its scope) and their suppliers to **voluntarily disclose and register** such vulnerabilities in the database to facilitate risk management and mitigation.",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "weakness",
+            "flaw",
+            "susceptibility"
+          ],
+          [
+            "exploit"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": false,
+        "refused": false,
+        "reason": "The ANSWER omits the explicit legal definition of 'vulnerability' as a 'weakness, susceptibility or flaw of ICT products or ICT services that can be exploited by a cyber threat' (Art. 6(15)), instead inventing a non-existent 'focus on publicly known vulnerabilities' and misrepresenting the directive's scope."
+      },
+      "seconds": 3.81
+    },
+    {
+      "id": "art21-measures",
+      "type": "multi_part",
+      "question": "What cybersecurity risk-management measures must essential and important entities take at a minimum?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 16
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 48
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 16
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 17
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 2,
+        "rr": 0.5,
+        "page_recall": 1.0
+      },
+      "answer": "The NIS2 directive requires essential and important entities to implement **appropriate and proportionate technical, operational, and organisational measures** to:\n\n- **Manage risks** to the security of network and information systems they use for operations or service provision\n- **Prevent or minimise the impact** of incidents on service recipients and other services\n- **Include systemic analysis**, accounting for the human factor to assess overall security comprehensively\n\nThe directive emphasises that these measures must be **proportionate to the entity’s risk exposure**, considering factors such as:\n- The entity’s criticality\n- The risks it faces (including societal risks)\n- Its size\n- The likelihood and severity of incidents (including their societal and economic impact)\n\nThe directive does not specify a fixed set of mandatory measures but requires entities to adopt a **risk-based approach** tailored to their specific context [CELEX_32022L2555_EN_TXT.pdf, p.16, p.48].",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "incident handling"
+          ],
+          [
+            "business continuity"
+          ],
+          [
+            "supply chain"
+          ],
+          [
+            "cryptography",
+            "encryption"
+          ],
+          [
+            "multi-factor",
+            "MFA"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER omits the **explicit minimum mandatory measures** listed in Art. 21(2) of the REFERENCE (e.g., risk analysis, incident handling, business continuity, supply chain security, etc.) and instead generalizes about 'risk-based approaches' without citing them."
+      },
+      "seconds": 3.81
+    },
+    {
+      "id": "essential-entity-categories",
+      "type": "multi_part",
+      "question": "Which entities are classified as essential entities?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 31
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 4
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 31
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 30
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "The NIS2 Directive classifies the following entities as **essential entities** (without prejudice to national security responsibilities):\n\n- Entities providing **essential services** as defined in **Article 2(2), points (b) to (e)** of the directive, including:\n  - **Critical infrastructure operators** in sectors such as energy, transport, banking, health, water, digital infrastructure, and space [CELEX_32022L2555_EN_TXT.pdf, p.31].\n  - **Providers of public electronic communications networks or services** that qualify as **large enterprises** under **Article 2 of the Annex to Recommendation 2003/361/EC** [CELEX_32022L2555_EN_TXT.pdf, p.31].\n  - **Public administration entities** at central or regional government level, where disruption of their services could have a **significant impact on critical societal or economic activities** [CELEX_32022L2555_EN_TXT.pdf, p.30].\n  - **Entities identified as critical entities under Directive (EU) 2022/2557** (e.g., chemical, food, or nuclear sectors) [CELEX_32022L2555_EN_TXT.pdf, p.31].\n  - **Entities previously classified as operators of essential services under Directive (EU) 2016/1148** (if a Member State so provides) [CELEX_32022L2555_EN_TXT.pdf, p.31].\n\nThe directive also allows Member States to consider **partner or linked enterprises** as essential entities only if their inclusion is **not disproportionate** [CELEX_32022L2555_EN_TXT.pdf, p.4].",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "trust service"
+          ],
+          [
+            "top-level domain",
+            "TLD"
+          ],
+          [
+            "DNS"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": false,
+        "refused": false,
+        "reason": "The ANSWER incorrectly states 'large enterprises' (missing 'medium-sized' for public electronic communications providers) and omits key categories like qualified trust service providers, TLD name registries, DNS providers, and Annex I entities exceeding medium-sized thresholds."
+      },
+      "seconds": 8.83
+    },
+    {
+      "id": "final-report-contents",
+      "type": "multi_part",
+      "question": "What must the final report on a significant incident contain?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 21
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 50
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "The final report on a significant incident must include the following:\n\n- A **detailed description of the incident**, including its **severity and impact** [CELEX_32022L2555_EN_TXT.pdf, p.50].\n- The **type of threat or root cause** that is likely to have triggered the incident [CELEX_32022L2555_EN_TXT.pdf, p.50].\n- **Applied and ongoing mitigation measures** [CELEX_32022L2555_EN_TXT.pdf, p.50].\n- Where applicable, the **cross-border impact of the incident** [CELEX_32022L2555_EN_TXT.pdf, p.50].\n\nThe report must be submitted **not later than one month after the submission of the incident notification** [CELEX_32022L2555_EN_TXT.pdf, p.20]. If the incident is still ongoing at that time, a **progress report** must be submitted instead, followed by a final report **within one month of handling the incident** [CELEX_32022L2555_EN_TXT.pdf, p.21].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER fully matches the REFERENCE and CONTEXT, including all required elements (description, severity/impact, root cause, mitigation measures, cross-border impact) and deadlines (one month after notification, progress report for ongoing incidents)."
+      },
+      "seconds": 20.61
+    },
+    {
+      "id": "registration-info",
+      "type": "multi_part",
+      "question": "What information must entities submit to competent authorities for the list of essential and important entities?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 31
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 4
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 3,
+        "rr": 0.3333333333333333,
+        "page_recall": 1.0
+      },
+      "answer": "Member States must require entities to submit the following information to the competent authorities for the list of essential and important entities:\n\n- The **name** of the entity **[CELEX_32022L2555_EN_TXT.pdf, p.31]**\n- The **address** of the entity **[CELEX_32022L2555_EN_TXT.pdf, p.5]**\n- **Up-to-date contact details**, including:\n  - Email addresses\n  - IP ranges\n  - Telephone numbers **[CELEX_32022L2555_EN_TXT.pdf, p.5]**\n- Where applicable, the **relevant sector and subsector** (as referred to in the annexes) **[CELEX_32022L2555_EN_TXT.pdf, p.5]**\n- Where applicable, a **list of the Member States** where the entity provides services falling within the scope of the Directive **[CELEX_32022L2555_EN_TXT.pdf, p.5]**.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER fully matches the REFERENCE, including all required fields (name, address, contact details with email/IP/telephone, sector/subsector, and Member States where services are provided), and all claims are explicitly supported by the CONTEXT (p.5 and p.31)."
+      },
+      "seconds": 4.12
+    },
+    {
+      "id": "digital-providers",
+      "type": "multi_part",
+      "question": "Which digital providers are covered by NIS2's Annex II?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 31
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 66
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 69
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 19
+        }
+      ],
+      "retrieval": {
+        "hit": false,
+        "rank": null,
+        "rr": 0.0,
+        "page_recall": 0.0
+      },
+      "answer": "NIS2 does **not** cover digital providers in Annex II.\n\nAnnex II of NIS2 lists **other critical sectors** (e.g., postal services, waste management, chemicals, food production), but **none of the digital infrastructure or ICT service management subsectors** (e.g., cloud providers, DNS services, managed security providers) appear in Annex II.\n\nAnnex II instead covers **non-digital sectors** like:\n- Postal and courier services (excluding couriers where it is not their main activity) **[CELEX_32022L2555_EN_TXT.pdf, p.69]**\n- Waste management (excluding undertakings where waste management is not their principal activity) **[CELEX_32022L2555_EN_TXT.pdf, p.69]**\n- Chemical manufacturing, production, and distribution **[CELEX_32022L2555_EN_TXT.pdf, p.69]**\n- Food production, processing, and distribution **[CELEX_32022L2555_EN_TXT.pdf, p.69]**\n\nDigital providers are instead covered under **Annex I** (essential entities) or **Article 2(1)** (e.g., cloud providers, DNS services, TLD registries) **[CELEX_32022L2555_EN_TXT.pdf, p.31]**.",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "marketplace"
+          ],
+          [
+            "search engine"
+          ],
+          [
+            "social network"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER accurately states that Annex II does not cover digital providers, explicitly listing only non-digital sectors and correctly referencing the CONTEXT for Annex II (p.69)."
+      },
+      "seconds": 7.81
+    },
+    {
+      "id": "management-body-duties",
+      "type": "multi_page",
+      "question": "What are the obligations of an entity's management body under NIS2?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 17
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 48
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 27
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 2,
+        "rr": 0.5,
+        "page_recall": 0.5
+      },
+      "answer": "The **management bodies** of **essential and important entities** under NIS2 have the following obligations:\n\n- **Approve cybersecurity risk-management measures** and oversee their implementation\n  [CELEX_32022L2555_EN_TXT.pdf, p.27].\n\n- **Ensure members of the management body follow regular cybersecurity training** to identify risks and assess cybersecurity practices\n  [CELEX_32022L2555_EN_TXT.pdf, p.48].\n\n- **Encourage the entity to offer similar cybersecurity training to employees** on a regular basis\n  [CELEX_32022L2555_EN_TXT.pdf, p.48].",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "liable",
+            "liability"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "partial",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER omits the **liability of management bodies for infringements of Article 21** (Art. 20(1)) as stated in the REFERENCE."
+      },
+      "seconds": 3.24
+    },
+    {
+      "id": "supervision-essential-vs-important",
+      "type": "multi_page",
+      "question": "How does supervision of essential entities differ from supervision of important entities?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 25
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 4
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 26
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 25
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "The NIS2 Directive distinguishes between **essential** and **important** entities in terms of supervisory obligations:\n\n- **Essential entities** are subject to a **comprehensive ex ante and ex post supervisory regime**\n  - This includes **mandatory documentation of compliance** with cybersecurity risk-management measures\n  - Supervisory authorities may use **prioritised, risk-based methodologies** to determine the scope and frequency of inspections, audits, or security scans\n  - Supervision may involve **on-site inspections, targeted security audits, or security scans**, with varying levels of detail depending on risk categorisation\n  - Authorities can **prioritise supervisory measures** based on risk assessments, such as the impact on business activities [CELEX_32022L2555_EN_TXT.pdf, p.24, p.26].\n\n- **Important entities** are subject to a **light, ex post only, supervisory regime**\n  - There is **no obligation to systematically document compliance** with cybersecurity risk-management measures\n  - Supervision is **reactive and triggered only by evidence, indications, or information** suggesting potential infringements\n  - Authorities do **not have a general obligation to supervise** these entities unless specific concerns arise [CELEX_32022L2555_EN_TXT.pdf, p.25].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER accurately reflects the REFERENCE, including proactive *ex ante* supervision (on-site inspections, audits) for essential entities (Art. 32(2)) and reactive *ex post* supervision (triggered by evidence) for important entities (Art. 33(1)), while omitting only the explicit legal article citations (which are implied in the context). All claims align verbatim with the CONTEXT."
+      },
+      "seconds": 8.48
+    },
+    {
+      "id": "gdpr-interplay",
+      "type": "multi_page",
+      "question": "What happens when a NIS2 infringement also involves a personal data breach under GDPR?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 61
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 56
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "When a NIS2 infringement by an **essential or important entity** also involves a **personal data breach** under GDPR, the following applies:\n\n- **Competent authorities** must inform the **GDPR supervisory authority** (as defined in Articles 55 or 56 of GDPR) **without undue delay** if they become aware of the breach during supervision or enforcement of NIS2 obligations under **Articles 21 (incident reporting) or 23 (incident management)** [CELEX_32022L2555_EN_TXT.pdf, p.60].\n- If the competent authority is not the GDPR supervisory authority, it must inform **its own Member State’s GDPR supervisory authority** of the potential breach [CELEX_32022L2555_EN_TXT.pdf, p.61].\n- The competent authorities must **cooperate closely** with GDPR supervisory authorities when addressing incidents involving personal data breaches, without interfering with their existing GDPR tasks [CELEX_32022L2555_EN_TXT.pdf, p.56].",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "same conduct",
+            "not impose",
+            "cannot impose",
+            "no administrative fine",
+            "not also"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER accurately reflects the REFERENCE and CONTEXT, including the mandatory notification to GDPR supervisory authorities (Art. 35(1)), the cooperation requirement (Art. 32(3)), and the distinction of competences without duplication of GDPR fines."
+      },
+      "seconds": 4.73
+    },
+    {
+      "id": "waste-water-vs-waste-management",
+      "type": "comparison",
+      "question": "Are waste water and waste management in the same NIS2 annex?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 69
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 66
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 9
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 64
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "No, the NIS2 directive does not place waste water and waste management in the same annex.\n\n- Waste management is listed in **Annex II** as an \"other critical sector\" for entities carrying out waste management as defined in Article 3, point (9), of Directive 2008/98/EC, excluding those for whom waste management is not their principal economic activity [CELEX_32022L2555_EN_TXT.pdf, p.69].\n- Waste water is listed in **Annex I** as a sector of high criticality for undertakings collecting, disposing of, or treating urban, domestic, or industrial waste water as defined in Article 2, points (1), (2), and (3), of Council Directive 91/271/EEC, excluding those for which these activities are non-essential [CELEX_32022L2555_EN_TXT.pdf, p.66].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER incorrectly states waste water is in **Annex I** (it is in **Annex II**), contradicting the REFERENCE and CONTEXT."
+      },
+      "seconds": 2.98
+    },
+    {
+      "id": "jurisdiction-cloud-vs-telecom",
+      "type": "comparison",
+      "question": "Which Member State has jurisdiction over a cloud computing provider, and how does that differ for a telecom network provider?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 23
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 23
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 23
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 8
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "A cloud computing provider falls under the jurisdiction of the **Member State in which it has its main establishment in the Union**, where \"main establishment\" means the location of its **effective exercise of activity through stable arrangements** (e.g., operational headquarters, management, or decision-making) [CELEX_32022L2555_EN_TXT.pdf, p.23].\n\nIn contrast, a **telecom network provider** (provider of public electronic communications networks) is subject to the jurisdiction of the **Member State in which it provides its services**, not necessarily its main establishment [CELEX_32022L2555_EN_TXT.pdf, p.23]. This means a telecom operator’s obligations are tied to the countries where it operates networks or services, rather than just its headquarters.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER fully matches the REFERENCE and CONTEXT, correctly distinguishing jurisdiction for cloud providers (main establishment) vs. telecom network providers (service provision location)."
+      },
+      "seconds": 3.38
+    },
+    {
+      "id": "scope-size-threshold",
+      "type": "lookup",
+      "question": "Which entities fall within NIS2's scope based on size?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 5
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 2
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 30
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 3,
+        "rr": 0.3333333333333333,
+        "page_recall": 1.0
+      },
+      "answer": "NIS2 applies to entities based on a **size-cap rule** that aligns with the definition of **medium-sized enterprises** under **Commission Recommendation 2003/361/EC**, unless they are explicitly excluded or fall under other criteria:\n\n- **Applies to all entities** that qualify as **medium-sized enterprises** or **exceed the medium-sized enterprise thresholds** under **Article 2 of the Annex to Recommendation 2003/361/EC** and operate in the sectors or provide services covered by NIS2 **[CELEX_32022L2555_EN_TXT.pdf, p.2]**.\n\nThe **medium-sized enterprise thresholds** (as defined in Recommendation 2003/361/EC) are:\n- **Turnover ≤ €50 million** (or **balance sheet total ≤ €43 million**),\n- **Average number of employees ≤ 250**.\n\nIf an entity exceeds these thresholds, it falls under NIS2’s scope **unless explicitly excluded** (e.g., microenterprises or small enterprises under certain conditions, or entities outside the listed sectors).",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [
+          "50 million",
+          "43 million"
+        ],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "partial",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER correctly identifies the size-cap rule for medium-sized enterprises but incorrectly states the turnover and balance sheet thresholds (should be **≤ €50M turnover OR ≤ €43M balance sheet**, not '≤ €50M turnover (or ≤ €43M balance sheet)') and omits that **certain entities are covered regardless of size** (e.g., critical entities under Directive (EU) 2022/2557 or domain name registration services)."
+      },
+      "seconds": 4.98
+    },
+    {
+      "id": "scope-excluded-public-admin",
+      "type": "lookup",
+      "question": "Which public administration entities are excluded from NIS2?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 30
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 3
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 3
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 67
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "The NIS2 Directive explicitly excludes the following public administration entities from its scope:\n\n- Public administration entities that are **jointly established with a third country in accordance with an international agreement** [CELEX_32022L2555_EN_TXT.pdf, p.3].\n\n- **Member States’ diplomatic and consular missions in third countries**, as well as their **network and information systems located in the premises of the mission or operated for users in a third country** [CELEX_32022L2555_EN_TXT.pdf, p.3].\n\nAdditionally, while not explicitly excluded by name, Member States may **exempt specific entities** from certain obligations if they carry out activities in the areas of **national security, public security, defence, or law enforcement** [CELEX_32022L2555_EN_TXT.pdf, p.3]. This includes entities involved in:\n- The prevention, investigation, detection, or prosecution of criminal offences.\n- Services exclusively provided to a public administration entity that is itself excluded from the Directive’s scope [CELEX_32022L2555_EN_TXT.pdf, p.3].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "partial",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER correctly identifies excluded entities (diplomatic missions, joint third-country entities) and mentions exemptions for national security/law enforcement, but omits the **explicit exclusion of public administration entities carrying out activities in national security, public security, defence, or law enforcement** (Art. 2(7) in REFERENCE), instead framing it as a *possible exemption* rather than a strict exclusion."
+      },
+      "seconds": 4.63
+    },
+    {
+      "id": "scope-education",
+      "type": "lookup",
+      "question": "Does NIS2 apply to universities and education institutions?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 30
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 3
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 24
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 24
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "NIS2 **does not automatically apply** to education institutions, including universities.\n\n- The directive explicitly states that **Member States may choose** to apply it to education institutions, particularly where they carry out **critical research activities** [CELEX_32022L2555_EN_TXT.pdf, p.30].\n- This means that whether a university or education institution falls under NIS2 depends on **national law** in each EU Member State, and only if the institution is involved in critical research.\n\nThe directive does not impose a general obligation for all education institutions.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The answer accurately reflects the reference and is fully supported by the context (Art. 2(5)(b) on p.30)."
+      },
+      "seconds": 2.58
+    },
+    {
+      "id": "sanction-ceo-ban",
+      "type": "lookup",
+      "question": "Can a CEO be personally barred from management under NIS2?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 27
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 57
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 17
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 27
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "Yes, NIS2 allows a **temporary prohibition** on a CEO (or legal representative) exercising managerial functions in an essential entity under specific conditions:\n\n- **Scope**: The prohibition applies to any natural person discharging **managerial responsibilities at chief executive officer or legal representative level** in an essential entity.\n- **Trigger**: The competent authority may request a temporary prohibition if the entity has committed an infringement of NIS2 requirements.\n- **Duration**: The prohibition remains in place **until the entity remedies the deficiencies** or complies with the competent authority’s requirements.\n- **Procedural safeguards**: The measure must respect **Union law and the Charter of Fundamental Rights**, including the right to an effective remedy, fair trial, presumption of innocence, and rights of the defence.\n- **Authority**: The request is made to **relevant national bodies, courts, or tribunals**, which enforce the prohibition under national law.\n\nThe directive does not specify a fixed duration or automatic revocation—it depends on the entity’s corrective actions [CELEX_32022L2555_EN_TXT.pdf, p.57].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER accurately reflects the REFERENCE and CONTEXT, including scope (essential entities only), trigger (infringement), duration (remedial action), procedural safeguards, and reliance on national courts—all directly supported by the CONTEXT (p.57)."
+      },
+      "seconds": 4.12
+    },
+    {
+      "id": "voluntary-notification",
+      "type": "lookup",
+      "question": "Can an organisation outside NIS2's scope still report incidents?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 51
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 19
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 6
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        }
+      ],
+      "retrieval": {
+        "hit": false,
+        "rank": null,
+        "rr": 0.0,
+        "page_recall": 0.0
+      },
+      "answer": "No. The directive does not require or allow organisations outside its scope to report incidents.\n\nThe directive only mandates reporting obligations for **essential and important entities** within its scope\n[CELEX_32022L2555_EN_TXT.pdf, p.20].\nIt does not grant or require any reporting obligations for entities outside its scope.\n\nThe directive does not mention any voluntary reporting mechanism for organisations outside its scope.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": false,
+        "refused": false,
+        "reason": "The answer contradicts the reference (Art. 30(1)(b) explicitly allows voluntary reporting by any entity) and ignores the context's implicit support for voluntary reporting (e.g., recital 95 referencing Directive (EU) 2018/1972’s incident notifications)."
+      },
+      "seconds": 3.1
+    },
+    {
+      "id": "cvd-coordinator",
+      "type": "lookup",
+      "question": "What role does a CSIRT play in coordinated vulnerability disclosure?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 13
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 40
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 12
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 40
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 2,
+        "rr": 0.5,
+        "page_recall": 1.0
+      },
+      "answer": "The NIS2 Directive assigns the following roles to **CSIRTs (Computer Security Incident Response Teams)** in **coordinated vulnerability disclosure**:\n\n- **Receiving reports**: Member States must ensure that natural or legal persons can report vulnerabilities to the **CSIRT designated as coordinator**, either anonymously if requested\n  [CELEX_32022L2555_EN_TXT.pdf, p.40].\n\n- **Follow-up and coordination**:\n  - The coordinator CSIRT must carry out **diligent follow-up** on reported vulnerabilities.\n  - If a vulnerability could affect entities in **more than one Member State**, the coordinator CSIRT must **cooperate with other CSIRTs** within the CSIRTs network to address it\n    [CELEX_32022L2555_EN_TXT.pdf, p.40].\n\n- **Promoting standardised practices**: CSIRTs must **promote the adoption of common practices** for coordinated vulnerability disclosure, including:\n  - Structured reporting procedures\n  - Crisis management frameworks\n  - Timing alignment for remediation and public disclosure\n    [CELEX_32022L2555_EN_TXT.pdf, p.40].\n\n- **Supporting manufacturers/providers**: CSIRTs facilitate a **voluntary framework** where vulnerabilities are reported to the manufacturer or provider of the affected ICT products/services before public disclosure, enabling timely remediation\n  [CELEX_32022L2555_EN_TXT.pdf, p.12].",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "intermediary"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "partial",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER omits the explicit role of the CSIRT as a **trusted intermediary** (Art. 12(1)) between the reporter and the manufacturer/provider, as stated in the REFERENCE."
+      },
+      "seconds": 4.25
+    },
+    {
+      "id": "vulnerability-database",
+      "type": "lookup",
+      "question": "Who maintains the European vulnerability database?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 41
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 13
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 13
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 13
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "The European vulnerability database is maintained by **ENISA** (European Union Agency for Cybersecurity).\n\nENISA is tasked with developing and maintaining the database, including establishing the necessary information systems, policies, procedures, and technical and organizational measures to ensure its security and integrity [CELEX_32022L2555_EN_TXT.pdf, p.41].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "partial",
+        "faithful": true,
+        "refused": false,
+        "reason": "The answer correctly identifies ENISA as the maintainer but omits the requirement to consult the Cooperation Group (Art. 12(2))."
+      },
+      "seconds": 2.97
+    },
+    {
+      "id": "eu-cyclone",
+      "type": "lookup",
+      "question": "What is EU-CyCLONe for?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 45
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 15
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 45
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 14
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "EU-CyCLONe is established to:\n\n- **Support coordinated management of large-scale cybersecurity incidents and crises at the operational level**\n  [CELEX_32022L2555_EN_TXT.pdf, p.16].\n\n- **Ensure regular exchange of relevant information among Member States and Union institutions, bodies, offices, and agencies**\n  [CELEX_32022L2555_EN_TXT.pdf, p.16].\n\n- **Increase preparedness for managing large-scale cybersecurity incidents and crises**\n  [CELEX_32022L2555_EN_TXT.pdf, p.45].\n\n- **Develop shared situational awareness for large-scale cybersecurity incidents and crises**\n  [CELEX_32022L2555_EN_TXT.pdf, p.45].\n\n- **Assess consequences and impact of large-scale cybersecurity incidents and crises, and propose mitigation measures**\n  [CELEX_32022L2555_EN_TXT.pdf, p.45].\n\n- **Coordinate the management of large-scale cybersecurity incidents and crises, and support decision-making at the political level**\n  [CELEX_32022L2555_EN_TXT.pdf, p.45].\n\n- **Act as an intermediary between the technical and political levels during large-scale cybersecurity incidents and crises**\n  [CELEX_32022L2555_EN_TXT.pdf, p.15].\n\n- **Enhance cooperation at the operational level and support decision-making at the political level**\n  [CELEX_32022L2555_EN_TXT.pdf, p.15].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER fully aligns with the REFERENCE and CONTEXT, covering all key tasks (coordination, information exchange, preparedness, situational awareness, impact assessment, political support, and technical-political intermediation) without contradiction or omission, and all claims are directly supported by the CONTEXT."
+      },
+      "seconds": 5.96
+    },
+    {
+      "id": "certification",
+      "type": "lookup",
+      "question": "Can Member States require entities to use certified ICT products?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 16
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 51
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 18
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 48
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 2,
+        "rr": 0.5,
+        "page_recall": 1.0
+      },
+      "answer": "Member States **may** require essential and important entities to use certified ICT products, ICT services, or ICT processes, but only under specific conditions:\n\n- **Scope**: This applies to **essential and important entities** as defined by the directive.\n- **Proportionality**: The requirement must be **proportionate** to the risks posed to the entity’s network and information systems, considering the state-of-the-art of cybersecurity measures and the cost of implementation [CELEX_32022L2555_EN_TXT.pdf, p.16].\n- **Certification basis**: The ICT products, services, or processes must be certified under **European cybersecurity certification schemes** adopted pursuant to **Article 49 of Regulation (EU) 2019/881** [CELEX_32022L2555_EN_TXT.pdf, p.51].\n- **Delegated acts**: The Commission may adopt delegated acts specifying **which categories of entities** must use certified products, but only after identifying **insufficient levels of cybersecurity** and including an **implementation period** [CELEX_32022L2555_EN_TXT.pdf, p.51].\n- **Encouragement of alternatives**: Member States are also encouraged to promote the use of **qualified trust services** [CELEX_32022L2555_EN_TXT.pdf, p.51].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The answer accurately reflects the REFERENCE and CONTEXT, including the 'may require' distinction, proportionality, certification under Regulation (EU) 2019/881 (Art. 49), and the role of delegated acts, while omitting no key facts."
+      },
+      "seconds": 4.84
+    },
+    {
+      "id": "minimum-harmonisation",
+      "type": "lookup",
+      "question": "Can a Member State impose stricter cybersecurity rules than NIS2?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 9
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 2
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 16
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 2
+        }
+      ],
+      "retrieval": {
+        "hit": false,
+        "rank": null,
+        "rr": 0.0,
+        "page_recall": 0.0
+      },
+      "answer": "The NIS2 Directive explicitly allows Member States to impose stricter cybersecurity rules than those set out in the directive.\n\n- Member States may **adopt stricter measures** than those required by NIS2, provided they do not conflict with the directive’s minimum rules or undermine its objectives\n  **[CELEX_32022L2555_EN_TXT.pdf, p.2]**.\n\n- The directive’s framework is designed to ensure **minimum harmonization** while preserving national flexibility to address specific risks or vulnerabilities within their jurisdiction\n  **[CELEX_32022L2555_EN_TXT.pdf, p.2]**.\n\n- Member States may **designate or establish competent authorities** to enforce stricter rules, as long as they align with broader EU cybersecurity objectives\n  **[CELEX_32022L2555_EN_TXT.pdf, p.9]**.",
+      "checks": {
+        "must_include_ok": false,
+        "missing": [
+          [
+            "higher level"
+          ]
+        ],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "partial",
+        "faithful": false,
+        "refused": false,
+        "reason": "The ANSWER correctly states the principle of stricter rules but invents the 'minimum harmonization' term and misattributes the legal basis (Art. 5 is missing); the CONTEXT lacks explicit confirmation of 'minimum harmonization' as a legal term."
+      },
+      "seconds": 3.71
+    },
+    {
+      "id": "recital-ai",
+      "type": "recital",
+      "question": "What does NIS2 say about using artificial intelligence?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 11
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 17
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 1
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 24
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "The NIS2 Directive encourages Member States to integrate artificial intelligence (AI) and innovative cybersecurity technologies in their national cybersecurity strategies, with the following key points:\n\n- **Promotion of AI for cybersecurity**: Member States should encourage the use of AI and automated or semi-automated tools to improve the detection and prevention of cyberattacks [CELEX_32022L2555_EN_TXT.pdf, p.11].\n- **Research and development**: Member States must support activities in research and development to facilitate the use of AI-based cybersecurity tools, including data sharing for training and improving these technologies [CELEX_32022L2555_EN_TXT.pdf, p.11].\n- **Compliance with data protection**: The use of AI must comply with Union data protection law, including principles such as data accuracy, minimisation, fairness, transparency, and security (e.g., encryption) [CELEX_32022L2555_EN_TXT.pdf, p.11].\n- **Integration by entities**: Entities covered by the Directive (e.g., critical infrastructure operators) should evaluate their cybersecurity capabilities and, where appropriate, integrate AI or machine-learning systems to enhance their security [CELEX_32022L2555_EN_TXT.pdf, p.17].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The ANSWER fully aligns with the REFERENCE and CONTEXT, covering all key points (encouragement of AI, R&D, data protection compliance, and integration by entities) without contradiction or omission."
+      },
+      "seconds": 4.17
+    },
+    {
+      "id": "partial-ransom-payment",
+      "type": "partial",
+      "question": "Does NIS2 allow or prohibit paying a ransom?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 11
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 21
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 13
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 48
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 1,
+        "rr": 1.0,
+        "page_recall": 1.0
+      },
+      "answer": "The NIS2 directive does **not explicitly allow or prohibit** paying a ransom in response to a cyberattack.\n\n- The directive **does not mandate or forbid** ransom payments as a cybersecurity measure.\n- It **focuses on risk management** and requires entities to implement security measures, including incident handling, but does not prescribe specific responses to ransomware attacks.\n- The directive **encourages proactive cybersecurity strategies** (e.g., security by design, incident reporting) but leaves operational decisions—such as whether to pay a ransom—outside its scope.\n\nThe directive **does not address ransomware payments** as a policy or requirement, only as a threat to be mitigated through broader cybersecurity measures.",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The answer accurately reflects the directive’s silence on ransom payments (no explicit allowance or prohibition) and aligns with recital 54’s guidance on ransomware as a threat requiring national policy—not a directive mandate."
+      },
+      "seconds": 6.16
+    },
+    {
+      "id": "unanswerable-gdpr-fine",
+      "type": "unanswerable",
+      "question": "What is the maximum GDPR fine for a data breach?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 61
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 60
+        }
+      ],
+      "retrieval": {
+        "hit": null,
+        "rank": null,
+        "rr": null,
+        "page_recall": null
+      },
+      "answer": "The NIS2 Directive does **not** set a maximum fine for a GDPR data breach under its own rules.\n\nHowever, it does require that **Member States must ensure administrative fines for essential entities** that violate Articles 21 or 23 of NIS2—**if those violations entail a GDPR personal data breach**—are at least **EUR 10,000,000 or 2% of the entity’s total worldwide annual turnover** (whichever is higher) [CELEX_32022L2555_EN_TXT.pdf, p.60].\n\nThe actual GDPR fine for a data breach is governed by **Regulation (EU) 2016/679 (GDPR)**, which sets a maximum fine of **up to 4% of the entity’s total worldwide annual turnover** or **EUR 20,000,000** (whichever is higher) [CELEX_32022L2555_EN_TXT.pdf, p.60]. The NIS2 Directive does not alter this GDPR threshold.",
+      "checks": {
+        "must_include_ok": null,
+        "missing": [],
+        "hallucination_flags": [
+          "20,000,000"
+        ],
+        "refused": false
+      },
+      "judge": {
+        "correctness": "incorrect",
+        "faithful": false,
+        "refused": false,
+        "reason": "The ANSWER incorrectly attributes GDPR fine amounts (EUR 20M/4% turnover) to the CONTEXT, which only references GDPR (Art. 35) without specifying fine figures, and misrepresents NIS2’s role in GDPR enforcement."
+      },
+      "seconds": 6.94
+    },
+    {
+      "id": "unanswerable-national-transposition",
+      "type": "unanswerable",
+      "question": "What is the name of the national law that transposed NIS2 in France?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 1
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 1
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 21
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 1
+        }
+      ],
+      "retrieval": {
+        "hit": null,
+        "rank": null,
+        "rr": null,
+        "page_recall": null
+      },
+      "answer": "The **NIS2 Directive** itself does not specify the name of the national law that Member States must transpose it into their legal frameworks.\n\nThe directive only requires Member States to adopt and publish the necessary laws, regulations, and administrative provisions to comply with its provisions by **17 October 2024** [CELEX_32022L2555_EN_TXT.pdf, p.1]. It does not mandate a specific name for the transposing act, leaving this decision to each Member State.\n\nFor France, you would need to consult the French legal database or official publications to determine the exact name of the law transposing NIS2. The directive does not provide this information.",
+      "checks": {
+        "must_include_ok": null,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": true,
+        "reason": "The answer explicitly states the context does not provide the name of France's transposing law and correctly notes the directive only sets a deadline, not naming national laws."
+      },
+      "seconds": 5.04
+    },
+    {
+      "id": "partial-iso27001",
+      "type": "partial",
+      "question": "Does NIS2 require ISO 27001 certification?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 52
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 16
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 24
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 53
+        }
+      ],
+      "retrieval": {
+        "hit": true,
+        "rank": 2,
+        "rr": 0.5,
+        "page_recall": 1.0
+      },
+      "answer": "No, **NIS2 does not require ISO/IEC 27001 certification** as a compliance obligation.\n\nThe directive explicitly states that **essential and important entities must address cybersecurity risk-management measures**, including physical and environmental security, human resources security, and access control policies, **in line with European and international standards such as the ISO/IEC 27000 series** [CELEX_32022L2555_EN_TXT.pdf, p.16].\n\nHowever, NIS2 does not mandate ISO 27001 certification as a formal requirement. Instead, it encourages compliance with **standards like ISO/IEC 27001** as part of broader cybersecurity risk-management obligations. The directive also allows Member States to use **European cybersecurity certification schemes** (where available) to demonstrate compliance, but ISO 27001 is not explicitly named as a mandatory certification [CELEX_32022L2555_EN_TXT.pdf, p.16].",
+      "checks": {
+        "must_include_ok": true,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The answer accurately reflects the absence of a mandatory ISO 27001 certification requirement, correctly cites the recital (p.16) about alignment with ISO/IEC 27000 series as guidance, and aligns with Art. 24 on certification schemes without inventing details."
+      },
+      "seconds": 5.5
+    },
+    {
+      "id": "unanswerable-cyber-insurance",
+      "type": "unanswerable",
+      "question": "Does NIS2 require entities to hold cyber insurance?",
+      "retrieved": [
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 17
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 48
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 20
+        },
+        {
+          "source": "CELEX_32022L2555_EN_TXT.pdf",
+          "page": 7
+        }
+      ],
+      "retrieval": {
+        "hit": null,
+        "rank": null,
+        "rr": null,
+        "page_recall": null
+      },
+      "answer": "The NIS2 directive does **not** explicitly require essential or important entities to hold cyber insurance.\n\nThe directive focuses on:\n- **Cybersecurity risk-management measures** (e.g., technical, operational, and organisational safeguards) [CELEX_32022L2555_EN_TXT.pdf, p.48].\n- **Training obligations** for management and employees to identify risks and assess cybersecurity practices [CELEX_32022L2555_EN_TXT.pdf, p.48].\n- **Incident reporting** (e.g., early warnings, full reports) but does not mandate insurance as a compliance requirement [CELEX_32022L2555_EN_TXT.pdf, p.20].\n\nThe directive does not mention cyber insurance as a legal obligation.",
+      "checks": {
+        "must_include_ok": null,
+        "missing": [],
+        "hallucination_flags": [],
+        "refused": true
+      },
+      "judge": {
+        "correctness": "correct",
+        "faithful": true,
+        "refused": false,
+        "reason": "The answer accurately states that NIS2 does not require cyber insurance, aligns with the reference, and cites only explicitly supported claims from the provided context."
+      },
+      "seconds": 4.29
+    }
+  ]
+}

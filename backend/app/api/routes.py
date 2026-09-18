@@ -12,9 +12,9 @@ from app.ingestion.upload import (
     DocumentNotFound,
     ProtectedDocument,
     UploadError,
+    delete_document,
     ingest_upload,
 )
-from app.ingestion.upload import delete_document
 from app.rag.chain import answer, answer_stream
 from app.rag.documents import list_documents
 from app.schemas.chat import (
@@ -123,7 +123,8 @@ def upload(file: UploadFile) -> UploadResponse:
 
 @router.delete("/documents/{filename}", response_model=DeleteResponse)
 def delete(filename: str) -> DeleteResponse:
-    """Delete a document's chunks and its stored PDF.
+    """Delete an uploaded document's chunks. Uploads store no file, so this is a
+    pure vector clear; documents from data/raw_pdfs/ answer 403.
 
     Plain `{filename}`, not `{filename:path}`: the path converter would allow
     "/" back into the segment, which is what the name sanitising defends against.

@@ -11,3 +11,4 @@ data/processed/
 .ruff_cache/
 node_modules/
 frontend/dist/
+backend/eval/results/

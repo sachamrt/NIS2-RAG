@@ -52,14 +52,27 @@ def _prompt_inputs(question: str, history: list[tuple[str, str]] | None, k: int 
     }
 
 
+def answer_with_hits(
+    question: str, history: list[tuple[str, str]] | None = None, k: int | None = None
+) -> tuple[str, list[tuple["Document", float]]]:
+    """Answer a question; returns (answer text, full retrieved chunks with scores).
+
+    The evaluation runner uses this rather than `answer`: judging faithfulness
+    needs the complete context the model saw, not the truncated excerpts the UI
+    gets. Both go through this one function, so the eval scores exactly the
+    production path.
+    """
+    hits, inputs = _prompt_inputs(question, history, k)
+    reply = (ANSWER_PROMPT | get_llm()).invoke(inputs)
+    return reply.content, hits
+
+
 def answer(
     question: str, history: list[tuple[str, str]] | None = None, k: int | None = None
 ) -> tuple[str, list[Source]]:
     """Answer a question; returns (answer text, sources)."""
-    hits, inputs = _prompt_inputs(question, history, k)
-    chain = ANSWER_PROMPT | get_llm()
-    reply = chain.invoke(inputs)
-    return reply.content, [_to_source(doc, score) for doc, score in hits]
+    text, hits = answer_with_hits(question, history, k)
+    return text, [_to_source(doc, score) for doc, score in hits]
 
 
 def answer_stream(
