@@ -46,6 +46,12 @@ class Settings(BaseSettings):
     llm_timeout: int = 60
     llm_max_retries: int = 3
 
+    # --- retrieval ----------------------------------------------------------
+    retrieval_k: int = 4
+
+    # --- api ----------------------------------------------------------------
+    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+
     # --- vector store -------------------------------------------------------
     qdrant_url: str = "http://localhost:6333"
     qdrant_collection: str = "nis2"
