@@ -3,6 +3,10 @@
 The collection is created lazily with the vector size *probed from the
 configured embedder*, so switching EMBEDDING_PROVIDER cannot silently produce a
 dimension mismatch -- it either reuses a matching collection or refuses.
+
+With a sparse model configured (SPARSE_PROVIDER), the collection also gets a
+sparse vector slot and retrieval runs in hybrid mode. The sparse model runs
+client-side; Qdrant only stores the vectors and applies the IDF weighting.
 """
 
 from functools import lru_cache
@@ -12,9 +16,14 @@ from qdrant_client import QdrantClient, models
 
 from app.core.config import Settings, get_settings
 from app.core.embeddings_factory import get_embedding_dimension, get_embeddings
+from app.core.sparse_factory import get_sparse_embeddings
 
 if TYPE_CHECKING:
     from langchain_qdrant import QdrantVectorStore
+
+# Name of the sparse vector slot, shared by collection creation and the
+# LangChain store so the two cannot disagree (LangChain's own default).
+SPARSE_VECTOR_NAME = "langchain-sparse"
 
 
 @lru_cache
@@ -29,21 +38,28 @@ def get_client(settings: Settings | None = None) -> QdrantClient:
 
 
 def ensure_collection(settings: Settings | None = None) -> str:
-    """Create the collection if absent; verify its vector size if present.
+    """Create the collection if absent; verify its schema if present.
 
     Returns the collection name. Raises if an existing collection was built
-    with a different embedder (wrong vector size), which would otherwise fail
-    confusingly at upsert or silently retrieve garbage.
+    with a different embedder (wrong vector size) or lacks the sparse vector
+    that hybrid search needs, which would otherwise fail confusingly at upsert
+    or silently retrieve garbage.
     """
     settings = settings or get_settings()
     client = get_client(settings)
     name = settings.qdrant_collection
     dim = get_embedding_dimension()
+    hybrid = get_sparse_embeddings() is not None
 
     if not client.collection_exists(name):
         client.create_collection(
             collection_name=name,
             vectors_config=models.VectorParams(size=dim, distance=models.Distance.COSINE),
+            sparse_vectors_config=(
+                {SPARSE_VECTOR_NAME: models.SparseVectorParams(modifier=models.Modifier.IDF)}
+                if hybrid
+                else None
+            ),
         )
         # Payload index: lets phase-2 filtering by source file stay fast.
         client.create_payload_index(
@@ -53,7 +69,8 @@ def ensure_collection(settings: Settings | None = None) -> str:
         )
         return name
 
-    existing = client.get_collection(name).config.params.vectors
+    params = client.get_collection(name).config.params
+    existing = params.vectors
     size = existing.size if hasattr(existing, "size") else existing[""].size
     if size != dim:
         raise ValueError(
@@ -61,22 +78,36 @@ def ensure_collection(settings: Settings | None = None) -> str:
             f"embedder produces {dim}-dim. Use a different QDRANT_COLLECTION "
             f"or drop the existing one."
         )
+    if hybrid and SPARSE_VECTOR_NAME not in (params.sparse_vectors or {}):
+        raise ValueError(
+            f"Collection {name!r} has no sparse vector, but SPARSE_PROVIDER="
+            f"{settings.sparse_provider!r} needs one for hybrid search. Use a "
+            f"different QDRANT_COLLECTION or set SPARSE_PROVIDER=none."
+        )
     return name
 
 
 def get_vectorstore(settings: Settings | None = None) -> "QdrantVectorStore":
-    """LangChain vectorstore bound to the configured collection and embedder."""
-    from langchain_qdrant import QdrantVectorStore
+    """LangChain vectorstore bound to the configured collection and embedders.
+
+    Hybrid (dense + sparse, RRF-fused) when a sparse model is configured,
+    dense-only otherwise.
+    """
+    from langchain_qdrant import QdrantVectorStore, RetrievalMode
 
     settings = settings or get_settings()
     name = ensure_collection(settings)
+    sparse = get_sparse_embeddings()
     return QdrantVectorStore(
         client=get_client(settings),
         collection_name=name,
         embedding=get_embeddings(),
+        sparse_embedding=sparse,
+        sparse_vector_name=SPARSE_VECTOR_NAME,
+        retrieval_mode=RetrievalMode.HYBRID if sparse else RetrievalMode.DENSE,
     )
 
-
+    
 def clear(source: str | None = None, settings: Settings | None = None) -> str:
     """Delete one source's chunks, or every point if `source` is None.
 

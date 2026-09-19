@@ -50,6 +50,8 @@ class Settings(BaseSettings):
 
     # --- retrieval ----------------------------------------------------------
     retrieval_k: int = 4
+    sparse_provider: str = "none"
+    sparse_model: str = "Qdrant/bm25"
 
     # --- api ----------------------------------------------------------------
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
