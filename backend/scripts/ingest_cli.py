@@ -3,6 +3,9 @@
     python scripts/ingest_cli.py
     python scripts/ingest_cli.py --dir data/raw_pdfs --chunk-size 800
     python scripts/ingest_cli.py --stats        # just show what's in the collection
+
+The chunker (CHUNKER=fixed|structured) comes from .env; --chunk-size and
+--chunk-overlap only apply to the fixed one.
 """
 
 import argparse
@@ -52,6 +55,7 @@ def main() -> int:
 
     print(f"embedder {settings.embedding_provider}/{settings.mistral_embedding_model}")
     print(f"collection {settings.qdrant_collection}")
+    print(f"chunker    {settings.chunker}")
     print(f"{len(pdfs)} PDF(s) to ingest\n")
 
     # Only animate on a real terminal; piped/CI output stays line-per-event.
@@ -68,6 +72,9 @@ def main() -> int:
         print(" " * 60, end="\r")
     for record in report.per_file:
         print(f"  {record['file']}: {record['pages']} pages -> {record['chunks']} chunks")
+        if record["truncated_pages"]:
+            pages = ", ".join(map(str, record["truncated_pages"]))
+            print(f"    WARNING: text cut short on page(s) {pages}; the rest is not indexed")
     print(f"\n{report.summary()}")
     print(collection_stats())
     return 0

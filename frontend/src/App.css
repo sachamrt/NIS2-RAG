@@ -159,6 +159,12 @@
 .send { background: var(--accent); color: #fff; border-color: var(--accent); }
 .stop { color: var(--bad); }
 
+.sidebar .warning {
+  color: var(--warn);
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
 .error {
   color: var(--bad);
   font-size: 13px;

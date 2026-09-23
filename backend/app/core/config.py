@@ -48,6 +48,11 @@ class Settings(BaseSettings):
     llm_timeout: int = 60
     llm_max_retries: int = 3
 
+    # --- ingestion ----------------------------------------------------------
+    # Chunker for the curated corpus: fixed | structured. Uploads are always
+    # fixed. Part of the index: changing it needs a new collection.
+    chunker: str = "fixed"
+
     # --- retrieval ----------------------------------------------------------
     retrieval_k: int = 4
     sparse_provider: str = "none"

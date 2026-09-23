@@ -2,10 +2,11 @@
 
 import pytest
 from langchain_core.documents import Document
+from pypdf import apply_configuration
 
-from app.ingestion.loader import discover_pdfs, load_pdf
+from app.ingestion.loader import discover_pdfs, load_pdf, read_pdf
 from app.ingestion.splitter import chunk_id, split_documents
-from tests.pdf_fixture import write_pdf
+from tests.pdf_fixture import write_form_pdf, write_pdf
 
 PAGES = [
     ["Article 1 - Subject matter", "This Directive lays down measures."],
@@ -71,3 +72,23 @@ def test_overlap_carries_context_between_chunks():
     assert len(chunks) > 1
     tail = chunks[0].page_content[-20:]
     assert any(word in chunks[1].page_content for word in tail.split())
+
+
+# --- truncated extraction ------------------------------------------------
+
+
+def test_complete_page_is_not_reported_as_truncated(tmp_path):
+    path = write_form_pdf(tmp_path / "forms.pdf", ["first line", "second line", "third line"])
+    loaded = read_pdf(path)
+    assert loaded.truncated_pages == []
+    assert "third line" in loaded.pages[0].page_content
+
+
+def test_page_cut_short_by_pypdf_is_reported(tmp_path):
+    # pypdf stops after N form XObjects per page (5000 by default) and only
+    # logs it; lower the cap so three invocations exceed it.
+    path = write_form_pdf(tmp_path / "forms.pdf", ["first line", "second line", "third line"])
+    with apply_configuration(xform_maximum_invocations_per_extraction=1):
+        loaded = read_pdf(path)
+    assert loaded.truncated_pages == [1]
+    assert "third line" not in loaded.pages[0].page_content  # the text really is missing

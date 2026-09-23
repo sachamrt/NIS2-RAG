@@ -17,6 +17,10 @@ from app.rag.documents import list_documents
 
 logger = logging.getLogger(__name__)
 
+# Uploads can be anything, so they always take the generic splitter; CHUNKER
+# (structured) is for the curated corpus, whose layout is known.
+UPLOAD_CHUNKER = "fixed"
+
 MAX_BYTES = 50 * 1024 * 1024  # 50 MB
 PDF_MAGIC = b"%PDF-"
 MAX_NAME_LENGTH = 120
@@ -71,7 +75,7 @@ def validate(content: bytes, name: str) -> str:
 
 def ingest_upload(content: bytes, name: str) -> dict:
     """Validate, ingest, and keep nothing. Returns ``ingest_path``'s record:
-    {"file", "pages", "chunks"}.
+    {"file", "pages", "chunks", "truncated_pages"}.
 
     The PDF is written to a temp directory only because the loader reads from a
     path, and is removed as soon as ingestion finishes. Once the chunks are in
@@ -100,7 +104,7 @@ def ingest_upload(content: bytes, name: str) -> dict:
     with tempfile.TemporaryDirectory(prefix="nis2-upload-") as tmp:
         path = Path(tmp) / filename
         path.write_bytes(content)
-        record = ingest_path(path)
+        record = ingest_path(path, chunker=UPLOAD_CHUNKER)
 
     if record["chunks"] == 0:
         raise UploadError(

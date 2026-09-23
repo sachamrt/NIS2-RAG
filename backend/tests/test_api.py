@@ -118,3 +118,12 @@ def test_stream_reports_errors_as_an_event_not_a_500(client, monkeypatch):
         assert res.status_code == 200  # headers already sent; error rides the stream
         body = "".join(res.iter_text())
     assert "event: error" in body and "rate limited" in body
+
+
+def test_upload_reports_pages_that_were_only_partly_extracted(client, monkeypatch):
+    record = {"file": "report.pdf", "pages": 20, "chunks": 41, "truncated_pages": [12, 14]}
+    monkeypatch.setattr("app.api.routes.ingest_upload", lambda content, name: record)
+    upload = {"file": ("report.pdf", b"%PDF-1.4", "application/pdf")}
+    res = client.post("/api/documents", files=upload)
+    assert res.status_code == 200
+    assert res.json()["truncated_pages"] == [12, 14]

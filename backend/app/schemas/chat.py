@@ -59,3 +59,5 @@ class UploadResponse(BaseModel):
     source: str
     pages: int
     chunks: int
+    # Pages pypdf only partially extracted: indexed, but incomplete.
+    truncated_pages: list[int] = []

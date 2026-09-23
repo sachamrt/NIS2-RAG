@@ -29,11 +29,12 @@ def stubbed(tmp_path, monkeypatch):
 
     seen = {"ingested": [], "cleared": []}
 
-    def fake_ingest(path):
+    def fake_ingest(path, chunker=None):
         # Capture the path so tests can assert on the source label and that the
         # temp file really exists at ingestion time.
         seen["ingested"].append((path.name, path.exists()))
         seen["last_dir"] = path.parent
+        seen["chunker"] = chunker
         return {"file": path.name, "pages": 1, "chunks": 3}
 
     monkeypatch.setattr(upload, "ingest_path", fake_ingest)
@@ -108,10 +109,17 @@ def test_source_label_is_the_real_filename_not_a_temp_name(stubbed):
     assert stubbed["ingested"][0][0] == "NIS2 report.pdf"
 
 
+def test_uploads_use_the_fixed_chunker_whatever_chunker_is(stubbed, monkeypatch):
+    # CHUNKER=structured is for the curated corpus; an upload's layout is unknown.
+    monkeypatch.setenv("CHUNKER", "structured")
+    ingest_upload(PDF, "new.pdf")
+    assert stubbed["chunker"] == "fixed"
+
+
 def test_temp_file_removed_even_when_ingestion_fails(stubbed, monkeypatch):
     dirs = []
 
-    def boom(path):
+    def boom(path, chunker=None):
         dirs.append(path.parent)
         raise RuntimeError("mistral 429")
 
@@ -123,7 +131,7 @@ def test_temp_file_removed_even_when_ingestion_fails(stubbed, monkeypatch):
 
 def test_scanned_pdf_yielding_no_text_is_rejected(stubbed, monkeypatch):
     monkeypatch.setattr(
-        upload, "ingest_path", lambda p: {"file": p.name, "pages": 3, "chunks": 0}
+        upload, "ingest_path", lambda p, chunker=None: {"file": p.name, "pages": 3, "chunks": 0}
     )
     with pytest.raises(UploadError, match="OCR"):
         ingest_upload(PDF, "scan.pdf")

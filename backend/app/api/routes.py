@@ -117,7 +117,8 @@ def upload(file: UploadFile) -> UploadResponse:
     return UploadResponse(
         source=record["file"],
         pages=record["pages"],
-        chunks=record["chunks"]
+        chunks=record["chunks"],
+        truncated_pages=record.get("truncated_pages", []),
     )
     
 

@@ -41,8 +41,11 @@ def is_answerable(entry: dict) -> bool:
 # --- retrieval -----------------------------------------------------------
 
 
-def retrieval_metrics(entry: dict, retrieved: list[tuple[str, int]]) -> dict:
+def retrieval_metrics(entry: dict, retrieved: list[tuple[str, int | list[int]]]) -> dict:
     """Score retrieved (source, page) pairs, in rank order, against the evidence.
+
+    A hit may carry a list of pages: a structured chunk (one Article paragraph)
+    can straddle a page break, and it holds text from every page it lists.
 
     Two kinds of expected page:
     - ``evidence``: the answer's primary pages. On a multi-page question they
@@ -64,9 +67,13 @@ def retrieval_metrics(entry: dict, retrieved: list[tuple[str, int]]) -> dict:
     if not primary:
         return {"hit": None, "rank": None, "rr": None, "page_recall": None}
 
+    hits = [
+        {(source, page) for page in (pages if isinstance(pages, list) else [pages])}
+        for source, pages in retrieved
+    ]
     expected = primary | alternatives
-    rank = next((i for i, pair in enumerate(retrieved, 1) if pair in expected), None)
-    found = set(retrieved)
+    rank = next((i for i, pairs in enumerate(hits, 1) if pairs & expected), None)
+    found = set().union(*hits)
     recall = 1.0 if alternatives & found else len(primary & found) / len(primary)
     return {
         "hit": rank is not None,

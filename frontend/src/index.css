@@ -9,6 +9,7 @@
   --user: #ecebe7;
   --ok: #3f7d3f;
   --bad: #b3261e;
+  --warn: #8a5a00;
   color-scheme: light;
 }
 
@@ -24,6 +25,7 @@
     --user: #2b2926;
     --ok: #7cc47c;
     --bad: #f28b82;
+    --warn: #e6b450;
     color-scheme: dark;
   }
 }

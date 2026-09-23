@@ -61,12 +61,17 @@ def ensure_collection(settings: Settings | None = None) -> str:
                 else None
             ),
         )
-        # Payload index: lets phase-2 filtering by source file stay fast.
-        client.create_payload_index(
-            collection_name=name,
-            field_name="metadata.source",
-            field_schema=models.PayloadSchemaType.KEYWORD,
-        )
+        # Payload indexes keep metadata filters fast: by source file, and by
+        # the structure fields the structured chunker adds (step 3 filters on
+        # section; a tenant_id filter will later work the same way).
+        for field, schema in (
+            ("metadata.source", models.PayloadSchemaType.KEYWORD),
+            ("metadata.section", models.PayloadSchemaType.KEYWORD),
+            ("metadata.article", models.PayloadSchemaType.INTEGER),
+        ):
+            client.create_payload_index(
+                collection_name=name, field_name=field, field_schema=schema
+            )
         return name
 
     params = client.get_collection(name).config.params
@@ -138,6 +143,30 @@ def clear(source: str | None = None, settings: Settings | None = None) -> str:
         ),
     )
     return source
+
+
+def indexed_chunker(sources: list[str], settings: Settings | None = None) -> str | None:
+    """The chunker that built the points of `sources`; None if none are indexed.
+
+    Points from before chunkers were recorded carry no tag and count as "fixed".
+    """
+    settings = settings or get_settings()
+    client = get_client(settings)
+    name = settings.qdrant_collection
+    if not sources or not client.collection_exists(name):
+        return None
+    points, _ = client.scroll(
+        name,
+        scroll_filter=models.Filter(
+            must=[models.FieldCondition(key="metadata.source", match=models.MatchAny(any=sources))]
+        ),
+        limit=1,
+        with_payload=True,
+        with_vectors=False,
+    )
+    if not points:
+        return None
+    return (points[0].payload or {}).get("metadata", {}).get("chunker", "fixed")
 
 
 def collection_stats(settings: Settings | None = None) -> dict:

@@ -8,6 +8,7 @@ export default function Sidebar({ refreshKey, onUploaded }) {
   const [loading, setLoading] = useState(true)
   const [uploading, setUploading] = useState(null)
   const [uploadError, setUploadError] = useState(null)
+  const [uploadWarning, setUploadWarning] = useState(null)
   const [deleting, setDeleting] = useState(null)
   const fileInput = useRef(null)
 
@@ -35,6 +36,7 @@ export default function Sidebar({ refreshKey, onUploaded }) {
 
     setDeleting(source)
     setUploadError(null)
+    setUploadWarning(null)
     try {
       await deleteDocument(source)
       onUploaded?.()   // same refresh path as an upload
@@ -53,8 +55,18 @@ export default function Sidebar({ refreshKey, onUploaded }) {
 
     setUploading(file.name)
     setUploadError(null)
+    setUploadWarning(null)
     try {
-      await uploadDocument(file)
+      const result = await uploadDocument(file)
+      // Indexed, but pypdf gave up partway through these pages: say so, or
+      // questions about the missing text just fail with no explanation.
+      const cut = result.truncated_pages ?? []
+      if (cut.length > 0) {
+        setUploadWarning(
+          `${result.source}: text on page${cut.length > 1 ? 's' : ''} ${cut.join(', ')} ` +
+            'was only partly extracted — the rest of those pages is not searchable.',
+        )
+      }
       onUploaded?.()   // App bumps refreshKey -> this sidebar and the chat reload
     } catch (err) {
       setUploadError(err.message)
@@ -120,6 +132,7 @@ export default function Sidebar({ refreshKey, onUploaded }) {
         <p className="hint">Embedding the whole file — this can take a minute.</p>
       )}
       {uploadError && <p className="error">{uploadError}</p>}
+      {uploadWarning && <p className="warning">{uploadWarning}</p>}
 
       {docs && docs.documents.length === 0 && (
         <div className="empty">

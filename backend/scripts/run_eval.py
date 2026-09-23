@@ -108,8 +108,15 @@ def run_entry(entry: dict, args, judge_llm) -> dict:
         else:
             text, hits = with_retry(lambda: answer_with_hits(entry["question"], k=args.k))
 
-        retrieved = [(d.metadata.get("source"), int(d.metadata.get("page", 0))) for d, _ in hits]
-        result["retrieved"] = [{"source": s, "page": p} for s, p in retrieved]
+        retrieved = [
+            (d.metadata.get("source"), d.metadata.get("pages") or int(d.metadata.get("page", 0)))
+            for d, _ in hits
+        ]
+        result["retrieved"] = [
+            {"source": d.metadata.get("source"), "page": int(d.metadata.get("page", 0)),
+             "ref": d.metadata.get("ref")}
+            for d, _ in hits
+        ]
         result["retrieval"] = retrieval_metrics(entry, retrieved)
 
         if text is not None:
